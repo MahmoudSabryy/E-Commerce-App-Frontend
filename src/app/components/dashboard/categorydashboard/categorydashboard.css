@@ -1,0 +1,85 @@
+.category-wrapper {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* PAGE HEADER */
+.page-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.btn-add {
+  padding: 10px 18px;
+  border-radius: 12px;
+}
+
+.filter-card {
+  background: #ffffff;
+  border-radius: 16px;
+}
+
+.search-box {
+  background: #f1f3f5;
+  border-radius: 12px;
+  padding: 0 10px;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #6c757d;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 10px;
+}
+
+.filter-btn {
+  border-radius: 12px;
+  height: 45px;
+}
+
+/* CATEGORY CARD */
+.cat-card {
+  transition: 0.25s ease;
+  background: #ffffff;
+}
+
+.cat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.cat-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.cat-card h5 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cat-card .btn {
+  border-radius: 10px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 5px 12px;
+}
+.cat-card.cat-deleted {
+  background: #fee2e2;
+  border: 1px solid #ef4444;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.cat-card.cat-deleted h5 {
+  text-decoration: line-through;
+  color: #b91c1c;
+}

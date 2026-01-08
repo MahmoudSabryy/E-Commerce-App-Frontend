@@ -1,0 +1,9 @@
+.product-image-container {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.product-image-container img {
+  object-fit: cover;
+  max-height: 320px;
+}

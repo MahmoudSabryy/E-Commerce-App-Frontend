@@ -1,0 +1,220 @@
+<section class="bg-light rounded-4 shadow p-4 my-4 w-75 mx-auto">
+  <h1 class="text-center mb-4 mt-4">Checkout Order</h1>
+
+  <div class="row">
+    <!-- Order Summary -->
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-header text-white bg-primary">
+          <h4 class="text-center m-0">Order Summary</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            @for (item of userCart?.items; track $index) {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>{{ item?.product?.productName }}</span>
+
+              <span class="text-success">{{ item?.product?.price }} LE</span>
+            </li>
+            <span class="text-black">Shipping Price : 50 LE</span>
+            }
+            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+              <span>Total :</span>
+              <span class="text-success">{{ userCart?.totalCartPrice + 50 }} EGP</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Billing & Address Form -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h4 class="text-center m-0">Billing & Shipping Info</h4>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="orderForm" (ngSubmit)="submitOrderForm()">
+            <!-- Personal Info -->
+            <div class="row mb-3">
+              <div class="col-md-6 mb-2">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    formControlName="fullName"
+                    placeholder="Full Name"
+                    required
+                  />
+                  <label for="fullName"><i class="bi bi-person-fill me-2"></i>Full Name</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="form-floating">
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    formControlName="phone"
+                    placeholder="Phone"
+                    required
+                  />
+                  <label for="phone"><i class="bi bi-telephone-fill me-2"></i>Phone number</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Home Address Card -->
+            <div class="card border-primary mb-3">
+              <div class="card-header bg-primary text-white">Home Address</div>
+              <div class="card-body" formGroupName="homeAddress">
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="homeGovernorate"
+                        formControlName="governorate"
+                        placeholder="Governorate"
+                        required
+                      />
+                      <label for="homeGovernorate"
+                        ><i class="bi bi-geo-alt-fill me-2"></i>Governorate</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="homeCity"
+                        formControlName="city"
+                        placeholder="City"
+                        required
+                      />
+                      <label for="homeCity"><i class="bi bi-building me-2"></i>City</label>
+                    </div>
+                  </div>
+                  <div class="col-12 mb-2">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="homeAddressDetails"
+                        formControlName="addressDetails"
+                        placeholder="Address Details"
+                        required
+                      />
+                      <label for="homeAddressDetails"
+                        ><i class="bi bi-house-door-fill me-2"></i>Address Details</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Work Address Card -->
+            <div class="card border-secondary mb-3">
+              <div class="card-header bg-secondary text-white">Work Address</div>
+              <div class="card-body" formGroupName="workAddress">
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="workGovernorate"
+                        formControlName="governorate"
+                        placeholder="Governorate"
+                      />
+                      <label for="workGovernorate"
+                        ><i class="bi bi-geo-alt-fill me-2"></i>Governorate</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-2">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="workCity"
+                        formControlName="city"
+                        placeholder="City"
+                      />
+                      <label for="workCity"><i class="bi bi-building me-2"></i>City</label>
+                    </div>
+                  </div>
+                  <div class="col-12 mb-2">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="workAddressDetails"
+                        formControlName="addressDetails"
+                        placeholder="Address Details"
+                      />
+                      <label for="workAddressDetails"
+                        ><i class="bi bi-house-door-fill me-2"></i>Address Details</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Default Address & Payment -->
+            <div class="row mb-3">
+              <div class="col-md-6 mb-2">
+                <div class="form-floating">
+                  <select
+                    class="form-select"
+                    id="defaultAddress"
+                    formControlName="defaultAddress"
+                    required
+                  >
+                    <option value="homeAddress">Home Address</option>
+                    <option value="workAddress">Work Address</option>
+                  </select>
+                  <label for="defaultAddress"
+                    ><i class="bi bi-check-circle-fill me-2"></i>Default Address</label
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <div class="form-floating">
+                  <select
+                    class="form-select"
+                    id="paymentMethod"
+                    formControlName="paymentMethod"
+                    required
+                  >
+                    <option value="cash">Cash</option>
+                    <option value="card">Card</option>
+                  </select>
+                  <label for="paymentMethod"
+                    ><i class="fa-brands fa-amazon-pay"></i>Payment Method</label
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="shippingPrice">Shipping price</label>
+                <input id="shippingPrice" type="text" class="form-control" disabled value="50" />
+              </div>
+            </div>
+
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-success btn-lg" [disabled]="!orderForm.valid">
+                Place Order
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

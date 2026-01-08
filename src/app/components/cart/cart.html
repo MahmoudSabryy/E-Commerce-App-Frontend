@@ -1,0 +1,57 @@
+<section class="bg-main-light rounded-4 shadow p-4 my-2 w-75 mx-auto mt-5">
+  <h1 class="h2 text-center">Shop Cart</h1>
+
+  <p class="text-success">Total Cart Price :{{ cartItem.totalCartPrice }}</p>
+
+  @for(item of cartItem.items; track item._id){
+  <div class="row mb-1 border-bottom">
+    <div class="col-md-1">
+      <div>
+        <img
+          [src]="`${baseURI}/uploads/images/${item.product.images}`"
+          class="w-100"
+          [alt]="item.product.productName"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-11 d-flex align-items-center justify-content-between">
+      <div>
+        <h3 class="h5">{{ item.product.productDesc }}</h3>
+        <p class="text-success m-0">price : {{ item.price }}</p>
+        <button
+          (click)="removeProductFromCart(item.product._id)"
+          class="cursor-pointer btn text-danger"
+        >
+          <i class="fa-solid fa-trash fa-x"></i>
+        </button>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span
+          (click)="increaseProductQuanInCart(item.product._id)"
+          class="text-main cursor-pointer"
+        >
+          <i class="fa-solid fa-circle-plus fa-2xl"></i>
+        </span>
+
+        <span>
+          {{ item.quantity }}
+        </span>
+
+        @if(item.quantity>1){
+        <span
+          (click)="decreaseProductQuanInCart(item.product._id)"
+          class="text-main cursor-pointer"
+        >
+          <i class="fa-solid fa-circle-minus fa-2xl"></i>
+        </span>
+        }
+      </div>
+    </div>
+  </div>
+  }
+
+  <button routerLink="/orders" class="btn-main mt-2">CHECKOUT</button>
+
+  <p *ngIf="!cartItem.items?.length" class="text-center text-muted mt-3">Your cart is empty</p>
+</section>

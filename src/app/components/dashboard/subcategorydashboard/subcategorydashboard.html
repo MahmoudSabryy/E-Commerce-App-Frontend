@@ -1,0 +1,156 @@
+<!-- ADD MODAL -->
+<div class="modal fade" id="addSubModal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Add Sub Category</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form [formGroup]="addForm" (ngSubmit)="submitAdd()">
+        <div class="modal-body">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control mb-3" formControlName="name" />
+
+          <label class="form-label">Parent Category</label>
+          <select class="form-select mb-3" formControlName="category">
+            <option value="">Select Category</option>
+            @for (cat of categories; track cat._id) {
+            <option [value]="cat._id">{{ cat.name }}</option>
+            }
+          </select>
+
+          <label class="form-label">Status</label>
+          <select class="form-select" formControlName="isActive">
+            <option [value]="true">Active</option>
+            <option [value]="false">Not Active</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-dark btn-sm" type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal fade" id="editSubModal">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold">Edit Sub Category</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
+        <div class="modal-body">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control mb-3" formControlName="name" />
+
+          <label class="form-label">Parent Category</label>
+          <select class="form-select mb-3" formControlName="category">
+            <option value="">Select Category</option>
+            @for (cat of categories; track cat._id) {
+            <option [value]="cat._id">{{ cat.name }}</option>
+            }
+          </select>
+
+          <label class="form-label">Status</label>
+          <select class="form-select" formControlName="isActive">
+            <option [value]="true">Active</option>
+            <option [value]="false">Not Active</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary btn-sm" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<section class="py-4">
+  <div class="container-fluid subcat-wrapper">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold">Sub Categories</h2>
+        <p class="text-muted">Manage all collections inside your store</p>
+      </div>
+
+      <button class="btn-main" data-bs-toggle="modal" data-bs-target="#addSubModal">
+        <i class="bi bi-plus-circle"></i> Add Sub Category
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar glass-card p-3 rounded-4 mb-4">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            [(ngModel)]="searchValue"
+            (ngModelChange)="applyFilters()"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="filterCategory" (change)="applyFilters()">
+            <option value="">All Categories</option>
+            @for (cat of categories; track cat._id) {
+            <option [value]="cat._id">{{ cat.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <button class="btn btn-outline-success w-100" (click)="setActiveFilter('active')">
+            Active
+          </button>
+        </div>
+
+        <div class="col-md-2">
+          <button class="btn btn-outline-secondary w-100" (click)="setActiveFilter('all')">
+            All
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub Category Grid -->
+    <div class="row g-4">
+      @for (sub of filtered; track sub._id) {
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="sub-card glass-card p-3 rounded-4" [class.inactive]="sub.isActive === false">
+          <div class="d-flex justify-content-between">
+            <h5 class="fw-semibold">{{ sub.name }}</h5>
+            <span class="status-dot" [class.off]="!sub.isActive"></span>
+          </div>
+
+          <p class="small text-muted">{{ sub.category.name }}</p>
+
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <button
+              class="btn btn-sm btn-outline-primary"
+              data-bs-target="#editSubModal"
+              data-bs-toggle="modal"
+              (click)="openEdit(sub)"
+            >
+              Edit
+            </button>
+
+            <button class="btn btn-sm btn-outline-danger" (click)="delete(sub._id)">Delete</button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

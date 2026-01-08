@@ -1,0 +1,392 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f3f4f6;
+}
+
+/* WRAPPER */
+.dashboard-wrapper {
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: #111827;
+  color: #e5e7eb;
+  padding: 22px 18px;
+}
+
+.sidebar-header {
+  margin-bottom: 24px;
+}
+
+.sidebar-logo-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: #1f2937;
+  color: #f9fafb;
+  font-size: 18px;
+}
+
+.sidebar-logo-text h6 {
+  color: #f9fafb;
+}
+
+.text-muted-2 {
+  color: #9ca3af !important;
+  font-size: 12px;
+}
+
+.sidebar-section-title {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.nav-link-sidebar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e5e7eb;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 4px;
+  position: relative;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-link-sidebar i {
+  font-size: 18px;
+}
+
+.nav-link-sidebar:hover {
+  background: #1f2937;
+}
+
+.nav-link-sidebar.active {
+  background: #f9fafb;
+  color: #111827;
+}
+
+.nav-link-sidebar.active i {
+  color: #111827;
+}
+
+.badge-sidebar {
+  background: #f97316;
+  color: white;
+  border-radius: 999px;
+  font-size: 11px;
+  padding: 2px 7px;
+  margin-left: auto;
+}
+
+/* MAIN AREA */
+.main-area {
+  background: #f3f4f6;
+}
+
+/* TOPBAR */
+.topbar {
+  padding: 20px 28px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.topbar h4 {
+  font-weight: 600;
+}
+
+/* Search box */
+.search-box {
+  background: #e5e7eb;
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none !important;
+  font-size: 14px;
+  padding: 0;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Topbar icons */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  padding: 0;
+}
+
+.icon-btn:hover {
+  background: #f3f4f6;
+}
+
+.badge-noti {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #ef4444;
+  color: white;
+  border-radius: 999px;
+  font-size: 10px;
+  padding: 1px 5px;
+}
+
+/* User box */
+.user-box {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+}
+
+/* CONTENT */
+.content-area {
+  padding-top: 24px;
+}
+
+/* STATS CARDS */
+.stats-card {
+  border-radius: 22px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.stats-card-main {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.stats-card-main .text-muted,
+.stats-card-main .text-muted-2 {
+  color: #9ca3af !important;
+}
+
+.stats-icon-lg {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #1f2937;
+  color: #f9fafb;
+  font-size: 22px;
+}
+
+.stats-icon-sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 18px;
+}
+
+.text-sm {
+  font-size: 13px;
+}
+
+/* Cards general (Bootstrap override light) */
+.card {
+  border-radius: 18px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .sidebar {
+    display: none;
+  }
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+  .topbar {
+    padding-inline: 16px;
+  }
+}
+/* ======================= */
+/* 🔥 SIDEBAR HOVER EFFECTS */
+/* ======================= */
+
+.nav-link-sidebar {
+  position: relative;
+  overflow: hidden;
+  transition: 0.28s ease;
+}
+
+.nav-link-sidebar:hover {
+  background: #1f2937;
+  padding-left: 16px;
+  transform: translateX(3px);
+}
+
+.nav-link-sidebar:hover i {
+  transform: scale(1.2);
+  transition: 0.25s ease;
+}
+
+/* Active glowing border */
+.nav-link-sidebar.active {
+  background: #f9fafb;
+  color: #111827;
+  position: relative;
+}
+
+.nav-link-sidebar.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0ea5e9, #6366f1);
+}
+
+/* ======================= */
+/* 🌟 SIDEBAR LOGO ANIMATION */
+/* ======================= */
+
+.sidebar-logo-circle {
+  transition: 0.4s ease;
+  transform-origin: center;
+}
+
+.sidebar-logo-circle:hover {
+  transform: rotate(12deg) scale(1.08);
+  background: #374151;
+}
+
+/* ======================= */
+/* ⚡ TOPBAR USER HOVER */
+/* ======================= */
+
+.user-box {
+  transition: 0.25s ease;
+}
+
+.user-box:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+/* ======================= */
+/* 📊 STATS CARDS ANIMATION */
+/* ======================= */
+
+.stats-card {
+  transition: 0.28s ease-in-out;
+}
+
+.stats-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card-main:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Icon bounce effect */
+.stats-icon-lg,
+.stats-icon-sm {
+  transition: 0.22s ease;
+}
+
+.stats-card:hover .stats-icon-lg,
+.stats-card:hover .stats-icon-sm {
+  transform: scale(1.18) rotate(4deg);
+}
+
+/* ======================= */
+/* ✨ SMOOTH PAGE FADE-IN */
+/* ======================= */
+
+main,
+.sidebar,
+.topbar {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======================= */
+/* 💥 BUTTON ANIMATION */
+/* ======================= */
+
+.btn-main,
+.btn {
+  transition: 0.25s ease;
+}
+
+.btn-main:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* ======================= */
+/* 🟦 SOFT NEON HOVER SIDEBAR */
+/* ======================= */
+
+.nav-link-sidebar:hover span {
+  color: #e2e8f0;
+}
+
+.nav-link-sidebar:hover::after {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 0;
+  height: 100%;
+  width: 110%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05));
+  transform: skewX(-15deg);
+  animation: hoverShine 0.6s forwards;
+}
+
+@keyframes hoverShine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(150%);
+  }
+}

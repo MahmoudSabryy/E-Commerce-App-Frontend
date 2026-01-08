@@ -1,0 +1,250 @@
+<br />
+<br />
+<div class="dashboard-wrapper d-flex">
+  <!-- SIDEBAR -->
+  <aside class="sidebar d-flex flex-column">
+    <div class="sidebar-header d-flex align-items-center mb-4">
+      <div class="sidebar-logo-circle d-flex align-items-center justify-content-center">
+        <i class="bi bi-grid-1x2-fill">
+          <img src="./images/amazon-pay.png" class="w-50" alt="" />
+        </i>
+      </div>
+      <div class="ms-2 sidebar-logo-text">
+        <h6 class="mb-0 fw-semibold">Amazon</h6>
+        <small class="text-muted-2">E-Commerce Dashboard</small>
+      </div>
+    </div>
+
+    <nav class="flex-grow-1">
+      <p class="sidebar-section-title">Overview</p>
+
+      <a routerLink="/dashboard/orders" routerLinkActive="active" class="nav-link-sidebar">
+        <i class="bi bi-bag-check"></i>
+        <span>Orders</span>
+      </a>
+
+      <a routerLink="/dashboard/products" routerLinkActive="active" class="nav-link-sidebar">
+        <i class="bi bi-box-seam"></i>
+        <span>Products</span>
+      </a>
+      <a routerLink="/dashboard/category" routerLinkActive="active" class="nav-link-sidebar">
+        <i class="bi bi-box-seam"></i>
+        <span>Categories</span>
+      </a>
+      <a routerLink="/dashboard/subcategory" routerLinkActive="active" class="nav-link-sidebar">
+        <i class="bi bi-box-seam"></i>
+        <span>SubCategories</span>
+      </a>
+      <a routerLink="/dashboard/salesreport" routerLinkActive="active" class="nav-link-sidebar">
+        <i class="bi bi-box-seam"></i>
+        <span>Sales Reports</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer mt-auto pt-3">
+      <a href="#" class="nav-link-sidebar">
+        <i class="bi bi-gear"></i>
+        <span>Settings</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main-area flex-grow-1 d-flex flex-column">
+    <!-- TOP BAR -->
+    <header class="topbar d-flex align-items-center justify-content-between">
+      <div>
+        <h4 class="mb-1">Welcome back, {{ userData?.userName }}</h4>
+        <p class="mb-0 text-muted">Here are today's stats from your online store!</p>
+      </div>
+
+      <div class="d-flex align-items-center gap-3">
+        <!-- User -->
+        <div class="d-flex align-items-center gap-2 user-box">
+          <div class="d-none d-md-block">
+            <div class="fw-semibold small">{{ userData?.userName }}</div>
+            <small class="text-muted">{{ userData?.role?.toUpperCase() }}</small>
+          </div>
+          <i class="bi bi-chevron-down small text-muted"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content-area p-4">
+      <!-- KPI Cards Row -->
+      <div class="row g-4 mb-4">
+        <!-- Total Sales - big dark card -->
+        <div class="col-lg-6">
+          <div class="card stats-card stats-card-main h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <small class="text-muted">Total Sales</small>
+                  <div class="small text-muted-2">{{ orderData?.length }} Orders</div>
+                </div>
+                <div class="stats-icon-lg d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                </div>
+              </div>
+
+              <div class="display-6 fw-semibold mb-2">{{ ordersTotalSales | number }} EGP</div>
+
+              <div class="d-flex justify-content-between text-sm">
+                <div>
+                  <i class="bi bi-arrow-up-right text-success"></i>
+                  <span class="text-success fw-semibold">+15.6%</span>
+                  <span class="text-muted ms-1">vs last week</span>
+                </div>
+                <div class="text-muted">+1.4k this week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card stats-card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <small class="text-muted">Pending</small>
+                  <div class="small text-muted-2">{{ ordersTotalPending?.length }}</div>
+                </div>
+                <div class="stats-icon-sm d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-hourglass-end"></i>
+                </div>
+              </div>
+
+              <h3 class="fw-semibold mb-3">
+                {{ ordersTotalSalesPending }}
+              </h3>
+
+              <div class="d-flex justify-content-between text-sm">
+                <div>
+                  <i class="bi bi-arrow-up-right text-success"></i>
+                  <span class="text-success fw-semibold">+12.7%</span>
+                </div>
+                <div class="text-muted">+1.2k this week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preparing -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card stats-card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <small class="text-muted">Preparing</small>
+                  <div class="small text-muted-2">{{ ordersTotalPreparing?.length }}</div>
+                </div>
+                <div class="stats-icon-sm d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-person-running"></i>
+                </div>
+              </div>
+
+              <h3 class="fw-semibold mb-3">
+                {{ ordersTotalSalesPreparing }}
+              </h3>
+
+              <div class="d-flex justify-content-between text-sm">
+                <div>
+                  <i class="bi bi-arrow-up-right text-success"></i>
+                  <span class="text-success fw-semibold">+12.7%</span>
+                </div>
+                <div class="text-muted">+1.2k this week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- shipped -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card stats-card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <small class="text-muted">Shipped</small>
+                  <div class="small text-muted-5">{{ ordersTotalShipped?.length }}</div>
+                </div>
+                <div class="stats-icon-sm d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-truck-fast"></i>
+                </div>
+              </div>
+
+              <h3 class="fw-semibold mb-3 text-success">
+                {{ ordersTotalSalesShipped }} <span class="text-black">EGP</span>
+              </h3>
+
+              <div class="d-flex justify-content-between text-sm">
+                <div>
+                  <i class="bi bi-arrow-up-right text-success"></i>
+                  <span class="text-success fw-semibold">+12.7%</span>
+                </div>
+                <div class="text-muted">+1.2k this week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- delivered -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card stats-card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <small class="text-muted">Delivered</small>
+                  <div class="small text-muted-5">{{ ordersTotalDelivered?.length }}</div>
+                </div>
+                <div class="stats-icon-sm d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-truck-ramp-box"></i>
+                </div>
+              </div>
+
+              <h3 class="fw-semibold mb-3 text-success">
+                {{ ordersTotalSalesDelivered }} <span class="text-black">EGP</span>
+              </h3>
+
+              <div class="d-flex justify-content-between text-sm">
+                <div>
+                  <i class="bi bi-arrow-up-right text-success"></i>
+                  <span class="text-success fw-semibold">+12.7%</span>
+                </div>
+                <div class="text-muted">+1.2k this week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Refunds -->
+        <div class="col-lg-3 col-md-6">
+          <div class="card stats-card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <small class="text-muted">Refunds</small>
+                  <div class="small text-muted-2">{{ ordersTotalCancelled?.length }}</div>
+                </div>
+                <div class="stats-icon-sm d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-arrows-left-right"></i>
+                </div>
+              </div>
+
+              <h3 class="fw-semibold mb-3">{{ ordersTotalSalesCancelled }}</h3>
+
+              <div class="d-flex justify-content-between text-sm">
+                <div>
+                  <i class="bi bi-arrow-down-right text-danger"></i>
+                  <span class="text-danger fw-semibold">-12.7%</span>
+                </div>
+                <div class="text-muted">-213 this week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container my-5">
+  <h2 class="mb-4">Testimonials Dashboard</h2>
+
+  <div *ngIf="loading" class="text-center">Loading...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div class="table-responsive" *ngIf="!loading && testimonials.length">
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>User ID</th>
+          <th>Description</th>
+          <th>Submitted At</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of testimonials; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <code>{{ t.user._id }}</code>
+          </td>
+          <td>{{ t.description }}</td>
+          <td>{{ t.createdAt | date : 'medium' }}</td>
+          <td>
+            <span *ngIf="t.isApproved" class="badge bg-success">Approved</span>
+            <span *ngIf="!t.isApproved" class="badge bg-warning text-dark">Pending</span>
+          </td>
+          <td>
+            <button
+              *ngIf="!t.isApproved"
+              class="btn btn-sm btn-primary me-2"
+              (click)="approve(t._id)"
+            >
+              Approve
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="delete(t._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && testimonials.length === 0" class="alert alert-info">
+    No testimonials found.
+  </div>
+</div>

@@ -1,0 +1,269 @@
+<div class="profile-wrapper" *ngIf="!loading; else loadingTpl">
+  <div class="container py-5">
+    <!-- Alerts -->
+    <div class="row mb-3" *ngIf="successMsg || errorMsg">
+      <div class="col-lg-8 mx-auto">
+        <div *ngIf="successMsg" class="alert alert-success shadow-sm">
+          {{ successMsg }}
+        </div>
+        <div *ngIf="errorMsg" class="alert alert-danger shadow-sm">
+          {{ errorMsg }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Left: Summary card -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-lg profile-card">
+          <div class="card-body text-center p-4">
+            <div class="avatar-wrapper mx-auto mb-3">
+              <div class="avatar-circle">
+                <span class="avatar-letter">
+                  {{ user?.userName?.charAt(0) | uppercase }}
+                </span>
+              </div>
+            </div>
+
+            <h4 class="mb-1">{{ user?.userName }}</h4>
+            <p class="text-muted mb-1">
+              {{ user?.email }}
+            </p>
+            <span
+              class="badge rounded-pill"
+              [ngClass]="
+                user?.isBlocked ? 'bg-danger-subtle text-danger' : 'bg-success-subtle text-success'
+              "
+            >
+              {{ user?.isBlocked ? 'Blocked' : 'Active' }}
+            </span>
+
+            <hr class="my-4" />
+
+            <div class="d-flex flex-column gap-1 text-start small text-muted">
+              <div class="d-flex justify-content-between">
+                <span>Role</span>
+                <span class="fw-semibold text-uppercase">
+                  {{ user?.role || 'user' }}
+                </span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>Joined</span>
+                <span class="fw-semibold">
+                  {{ user?.createdAt | date : 'dd MMM yyyy' }}
+                </span>
+              </div>
+              <div class="d-flex justify-content-between" *ngIf="user?.changecredentials">
+                <span>Last credentials change</span>
+                <span class="fw-semibold">
+                  {{ user?.changecredentials | date : 'short' }}
+                </span>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="small text-muted">
+              <div class="d-flex justify-content-between mb-1">
+                <span>Email status</span>
+                <span
+                  class="badge"
+                  [ngClass]="
+                    user?.confirmEmail
+                      ? 'bg-success-subtle text-success'
+                      : 'bg-warning-subtle text-dark'
+                  "
+                >
+                  {{ user?.confirmEmail ? 'Verified' : 'Not verified' }}
+                </span>
+              </div>
+              <div *ngIf="user?.age">
+                <span class="me-1">Age:</span>
+                <span class="fw-semibold">{{ user?.age }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Editable form -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-lg profile-card">
+          <div class="card-header bg-transparent border-0 px-4 pt-4 pb-0">
+            <h5 class="mb-1">Profile Details</h5>
+            <p class="text-muted small mb-0">
+              You can update your personal information and addresses here.
+            </p>
+          </div>
+
+          <div class="card-body p-4">
+            <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+              <!-- Basic info -->
+              <div class="section-title mb-2">Basic Information</div>
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="form-label small">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="userName"
+                    [(ngModel)]="model.userName"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small">Email (read only)</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    [value]="model?.email || user?.email"
+                    disabled
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small">Gender</label>
+                  <select class="form-select" name="gender" [(ngModel)]="model.gender">
+                    <option value="">Not specified</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small">Phone</label>
+                  <input type="text" class="form-control" name="phone" [(ngModel)]="model.phone" />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small">Date of birth</label>
+                  <input type="date" class="form-control" name="dob" [(ngModel)]="model.DOB" />
+                </div>
+              </div>
+
+              <hr />
+
+              <!-- Addresses -->
+              <div class="section-title mb-2">Addresses</div>
+              <div class="row g-3">
+                <!-- Home address -->
+                <div class="col-md-6">
+                  <div class="address-box">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="fw-semibold small">
+                        <i class="bi bi-house-door me-1"></i>Home Address
+                      </span>
+                      <span class="badge bg-primary-subtle text-primary small"> Default </span>
+                    </div>
+
+                    <div class="mb-2">
+                      <label class="form-label small mb-1">Governorate</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        name="homeGovernorate"
+                        [(ngModel)]="model.addresses.homeAddress.governorate"
+                      />
+                    </div>
+
+                    <div class="mb-2">
+                      <label class="form-label small mb-1">City</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        name="homeCity"
+                        [(ngModel)]="model.addresses.homeAddress.city"
+                      />
+                    </div>
+
+                    <div>
+                      <label class="form-label small mb-1">Address details</label>
+                      <textarea
+                        rows="2"
+                        class="form-control form-control-sm"
+                        name="homeDetails"
+                        [(ngModel)]="model.addresses.homeAddress.addressDetails"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Work address -->
+                <div class="col-md-6">
+                  <div class="address-box">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="fw-semibold small">
+                        <i class="bi bi-building me-1"></i>Work Address
+                      </span>
+                    </div>
+
+                    <div class="mb-2">
+                      <label class="form-label small mb-1">Governorate</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        name="workGovernorate"
+                        [(ngModel)]="model.addresses.workAddress.governorate"
+                      />
+                    </div>
+
+                    <div class="mb-2">
+                      <label class="form-label small mb-1">City</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        name="workCity"
+                        [(ngModel)]="model.addresses.workAddress.city"
+                      />
+                    </div>
+
+                    <div>
+                      <label class="form-label small mb-1">Address details</label>
+                      <textarea
+                        rows="2"
+                        class="form-control form-control-sm"
+                        name="workDetails"
+                        [(ngModel)]="model.addresses.workAddress.addressDetails"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end mt-4">
+                <button
+                  class="btn btn-secondary me-2"
+                  type="button"
+                  (click)="loadProfile()"
+                  [disabled]="saving"
+                >
+                  Reset
+                </button>
+                <button
+                  class="btn btn-main-primary"
+                  type="submit"
+                  [disabled]="!profileForm.form.valid || saving"
+                >
+                  <span *ngIf="!saving">Save Changes</span>
+                  <span *ngIf="saving">
+                    <span class="spinner-border spinner-border-sm me-1"></span>
+                    Saving...
+                  </span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading template -->
+<ng-template #loadingTpl>
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 60vh">
+    <div class="spinner-border text-primary me-2" role="status"></div>
+    <span class="text-muted">Loading profile...</span>
+  </div>
+</ng-template>

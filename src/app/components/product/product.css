@@ -1,0 +1,17 @@
+.product-card {
+  transition: 0.3s ease;
+  background: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.text-main {
+  color: #0aad0a;
+}

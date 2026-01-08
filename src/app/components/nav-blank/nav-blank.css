@@ -1,0 +1,27 @@
+.profile-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  transition: 0.3s;
+}
+
+.profile-link {
+  font-weight: 600;
+  color: #333 !important;
+  transition: 0.3s;
+}
+
+.profile-link:hover .profile-avatar {
+  transform: scale(1.15);
+  border-color: #0d6efd;
+}
+
+.profile-link:hover {
+  color: #0d6efd !important;
+  text-shadow: 0 0 4px rgba(13, 110, 253, 0.4);
+}
+.d-none {
+  display: none;
+}

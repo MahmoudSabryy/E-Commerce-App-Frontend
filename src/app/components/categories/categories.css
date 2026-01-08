@@ -1,0 +1,88 @@
+/* Title Gradient */
+.text-gradient {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass Card Style */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.glass-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+}
+
+/* Image Styling */
+.cat-img img {
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.cat-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Smooth shadow + rounded */
+.cat-card {
+  border-radius: 20px;
+  overflow: hidden;
+}
+/* Fade + Slide Down Animation */
+.section-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.section-animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Product card animation */
+.product-card {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.4s ease;
+}
+
+.product-card.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.btn-back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 999;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0, 123, 255, 0.9);
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back-to-top:hover {
+  background: rgba(0, 86, 179, 0.95);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}

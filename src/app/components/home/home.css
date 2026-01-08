@@ -1,0 +1,94 @@
+/* Global */
+section {
+  border-radius: 20px;
+}
+
+h2 {
+  letter-spacing: -0.5px;
+}
+
+/* Slider */
+.owl-carousel img {
+  transition: transform 0.5s ease;
+}
+
+.owl-carousel img:hover {
+  transform: scale(1.03);
+}
+
+/* Category Card */
+.category-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Product Card */
+.product-card {
+  transition: all 0.3s ease;
+  border: 1px solid #f1f1f1;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Add to cart button */
+.product-card button {
+  transition: all 0.3s ease;
+}
+
+.product-card button:hover {
+  background-color: #000;
+  transform: scale(1.02);
+}
+
+/* Search input */
+input[type='search'] {
+  border-radius: 30px;
+  padding-left: 25px;
+}
+
+/* Testimonials */
+.testimony-container {
+  background: #fff;
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimony-container textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.testimony-container button {
+  width: 100%;
+  border-radius: 12px;
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  transition: 0.3s;
+}
+
+.testimony-container button:hover {
+  opacity: 0.9;
+}
