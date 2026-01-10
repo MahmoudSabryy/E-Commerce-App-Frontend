@@ -2,180 +2,131 @@
   <h1 class="h2 text-main">Register Now</h1>
 
   <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()">
+    <!-- Name -->
     <div class="my-2">
-      <label for="name">Name</label>
+      <label>Name</label>
       <input
-        [ngClass]="{
-          'is-valid':
-            !registerForm.get('userName')?.errors && registerForm.get('userName')?.touched,
-          'is-invalid':
-            registerForm.get('userName')?.errors && registerForm.get('userName')?.touched
-        }"
         formControlName="userName"
-        id="name"
-        type="text"
         class="form-control"
+        [ngClass]="{
+          'is-valid': registerForm.get('userName')?.valid && registerForm.get('userName')?.touched,
+          'is-invalid':
+            registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched
+        }"
       />
-      @if (registerForm.get("userName")?.errors &&
-      (registerForm.get("userName")?.touched||registerForm.get("userName")?.dirty)) {
+
+      @if (registerForm.get('userName')?.errors && registerForm.get('userName')?.touched) {
       <div class="alert alert-danger w-50">
-        @if(registerForm.get("userName")?.getError("required")){
-
+        @if (registerForm.get('userName')?.getError('required')) {
         <p class="m-0">Name is required</p>
-
-        } @else if (registerForm.get("userName")?.getError("minlength")) {
-
-        <p class="m-0">Name should be at least 3 chars</p>
-
-        }@else if (registerForm.get("userName")?.getError("maxlength")) {
-
-        <p class="m-0">Name should be at most 20 chars</p>
+        } @else if (registerForm.get('userName')?.getError('minlength')) {
+        <p class="m-0">Minimum 3 characters</p>
+        } @else if (registerForm.get('userName')?.getError('maxlength')) {
+        <p class="m-0">Maximum 20 characters</p>
         }
       </div>
       }
     </div>
 
+    <!-- Email -->
     <div class="my-2">
-      <label for="email">Email</label>
+      <label>Email</label>
       <input
-        [ngClass]="{
-          'is-valid':
-            !registerForm.get('userName')?.errors && registerForm.get('userName')?.touched,
-          'is-invalid':
-            registerForm.get('userName')?.errors && registerForm.get('userName')?.touched
-        }"
-        formControlName="email"
-        id="email"
         type="email"
+        formControlName="email"
         class="form-control"
+        [ngClass]="{
+          'is-valid': registerForm.get('email')?.valid && registerForm.get('email')?.touched,
+          'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+        }"
       />
 
-      @if (registerForm.get("email")?.errors &&
-      (registerForm.get("email")?.touched||registerForm.get("email")?.dirty)) {
-
-      <div class="w-50 alert alert-danger">
-        @if (registerForm.get("email")?.getError("required")) {
-
-        <p class="m-0">Email is required</p>
-        }@else if (registerForm.get("email")?.getError("email")) {
-
-        <p class="m-0">Email is In-valid</p>
-        }
+      @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+      <div class="alert alert-danger w-50">
+        <p class="m-0">Invalid email</p>
       </div>
       }
     </div>
 
+    <!-- Password -->
     <div class="my-2">
-      <label for="paswword">Paswword</label>
+      <label>Password</label>
       <input
-        [ngClass]="{
-          'is-valid':
-            !registerForm.get('userName')?.errors && registerForm.get('userName')?.touched,
-          'is-invalid':
-            registerForm.get('userName')?.errors && registerForm.get('userName')?.touched
-        }"
+        type="password"
         formControlName="password"
-        id="paswword"
-        type="password"
         class="form-control"
+        [ngClass]="{
+          'is-valid': registerForm.get('password')?.valid && registerForm.get('password')?.touched,
+          'is-invalid':
+            registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+        }"
       />
-
-      @if (registerForm.get("password")?.errors &&
-      (registerForm.get("password")?.touched||registerForm.get("password")?.dirty)) {
-
-      <div class="w-50 alert alert-danger">
-        @if (registerForm.get("password")?.getError("required")) {
-
-        <p class="m-0">password is required</p>
-        }@else if (registerForm.get("password")?.getError("pattern")) {
-
-        <p class="m-0">password is In-valid</p>
-        }
-      </div>
-      }
     </div>
 
+    <!-- Confirm Password -->
     <div class="my-2">
-      <label for="confirmpassword">Confirm password</label>
+      <label>Confirm Password</label>
       <input
-        [ngClass]="{
-          'is-valid':
-            !registerForm.get('userName')?.errors && registerForm.get('userName')?.touched,
-          'is-invalid':
-            registerForm.get('userName')?.errors && registerForm.get('userName')?.touched
-        }"
+        type="password"
         formControlName="confirmPassword"
-        id="confirmpassword"
-        type="password"
         class="form-control"
-      />
-
-      @if(registerForm.getError("mismatch")&&
-      (registerForm.get("confirmPassword")?.touched||registerForm.get("password")?.dirty)){
-      <p class="alert alert-danger w-50 m-0">password confirmation is incorrect</p>
-      }
-    </div>
-
-    <div class="my-2 d-flex py-3">
-      <label class="d-block">Gender</label>
-
-      <div class="mx-auto">
-        <input type="radio" id="male" value="male" formControlName="gender" name="gender" />
-        <label for="male">Male</label>
-      </div>
-
-      <div class="mx-auto">
-        <input type="radio" id="female" value="female" formControlName="gender" name="gender" />
-        <label for="female">Female</label>
-      </div>
-    </div>
-
-    <div class="my-2">
-      <label for="phone">Phone</label>
-      <input
         [ngClass]="{
           'is-valid':
-            !registerForm.get('userName')?.errors && registerForm.get('userName')?.touched,
+            !registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched,
           'is-invalid':
-            registerForm.get('userName')?.errors && registerForm.get('userName')?.touched
+            registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched
         }"
-        formControlName="phone"
-        id="phone"
-        type="tel"
-        class="form-control"
       />
 
-      @if (registerForm.get("phone")?.errors &&
-      (registerForm.get("phone")?.touched||registerForm.get("phone")?.dirty)) {
-
-      <div class="w-50 alert alert-danger">
-        @if (registerForm.get("phone")?.getError("required")) {
-
-        <p class="m-0">phone is required</p>
-        }@else if (registerForm.get("phone")?.getError("pattern")) {
-
-        <p class="m-0">phone is In-valid</p>
-        }
-      </div>
+      @if (registerForm.hasError('mismatch') && registerForm.get('confirmPassword')?.touched) {
+      <p class="alert alert-danger w-50">Passwords do not match</p>
       }
     </div>
 
-    <div class="my-2">
-      <label for="DOB">Date Of Birth</label>
-      <input formControlName="DOB" id="DOB" type="date" class="form-control" />
+    <!-- Gender -->
+    <div class="my-2 d-flex">
+      <label class="me-3">Gender</label>
+      <div>
+        <input type="radio" value="male" formControlName="gender" /> Male
+        <input type="radio" value="female" formControlName="gender" class="ms-3" /> Female
+      </div>
     </div>
 
-    <button type="submit" class="btn-main ms-auto d-block">
+    <!-- Phone -->
+    <div class="my-2">
+      <label>Phone</label>
+      <input
+        type="tel"
+        formControlName="phone"
+        class="form-control"
+        [ngClass]="{
+          'is-valid': registerForm.get('phone')?.valid && registerForm.get('phone')?.touched,
+          'is-invalid': registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched
+        }"
+      />
+    </div>
+
+    <!-- DOB -->
+    <div class="my-2">
+      <label>Date of Birth</label>
+      <input type="date" formControlName="DOB" class="form-control" />
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="btn-main ms-auto d-block"
+      [disabled]="registerForm.invalid || isLoading"
+    >
       Register @if (isLoading) {
-      <span><i class="fas fa-spin fa-spinner"></i></span>
+      <i class="fas fa-spinner fa-spin ms-2"></i>
       }
     </button>
 
-    @if(msgError){
-    <p class="alert alert-danger w-50 m-0">{{ msgError }}</p>
-
-    } @if(msgSuccess){
-    <p>Registered successfully</p>
+    @if (msgSuccess) {
+    <p class="alert alert-success mt-2">Registered successfully</p>
+    } @if (msgError) {
+    <p class="alert alert-danger mt-2">{{ msgError }}</p>
     }
   </form>
 </section>

@@ -32,7 +32,7 @@
           <a class="nav-link" routerLinkActive="active-link" routerLink="categories">Categories</a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="_Auth.isLoggedIn()">
           <a class="nav-link" routerLinkActive="active-link" routerLink="dashboard">Dashboard</a>
         </li>
       </ul>

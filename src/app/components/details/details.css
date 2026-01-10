@@ -1,9 +1,140 @@
-.product-image-container {
-  overflow: hidden;
-  border-radius: 12px;
+/* ===== Product Details ===== */
+.product-gallery {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 20px;
 }
 
-.product-image-container img {
-  object-fit: cover;
-  max-height: 320px;
+.main-img {
+  width: 100%;
+  height: 380px;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.main-img:hover {
+  transform: scale(1.1);
+}
+
+/* Thumbnails */
+.thumbnails img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  background: #f8f9fa;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumbnails img:hover {
+  border-color: #000;
+}
+
+/* Info */
+.category {
+  font-size: 13px;
+  color: #777;
+  font-weight: 600;
+}
+
+.product-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.rating {
+  font-size: 15px;
+  color: #f5a623;
+}
+
+.product-desc {
+  color: #666;
+  margin: 15px 0;
+}
+
+/* Price */
+.price-wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.current-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #198754;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.discount {
+  background: #dc3545;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* Stock */
+.stock {
+  font-size: 14px;
+  font-weight: 600;
+  color: #dc3545;
+}
+
+.stock.out {
+  color: #999;
+}
+
+/* Button */
+.add-to-cart-btn {
+  width: 100%;
+  padding: 14px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.add-to-cart-btn:hover {
+  background: #111;
+}
+
+/* Reviews */
+.review-card {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+/* Related */
+.related-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+}
+
+.related-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-img {
+    height: 260px;
+  }
+
+  .product-title {
+    font-size: 22px;
+  }
 }

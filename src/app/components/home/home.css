@@ -1,4 +1,4 @@
-/* Global */
+/* ========== Global ========== */
 section {
   border-radius: 20px;
 }
@@ -7,7 +7,7 @@ h2 {
   letter-spacing: -0.5px;
 }
 
-/* Slider */
+/* ========== Slider ========== */
 .owl-carousel img {
   transition: transform 0.5s ease;
 }
@@ -16,7 +16,35 @@ h2 {
   transform: scale(1.03);
 }
 
-/* Category Card */
+.slider-img {
+  width: 100%;
+  height: 350px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .slider-img {
+    height: 220px;
+  }
+}
+
+/* ========== Side Banners ========== */
+.side-banner {
+  width: 100%;
+  height: 170px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 992px) {
+  .side-banner {
+    height: 140px;
+  }
+}
+
+/* ========== Category Card ========== */
 .category-card {
   transition: all 0.3s ease;
   cursor: pointer;
@@ -26,7 +54,14 @@ h2 {
   transform: translateY(-6px);
 }
 
-/* Product Card */
+.category-img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+}
+
+/* ========== Product Card ========== */
 .product-card {
   transition: all 0.3s ease;
   border: 1px solid #f1f1f1;
@@ -37,15 +72,19 @@ h2 {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.product-card img {
+.product-img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #f8f9fa;
   transition: transform 0.3s ease;
 }
 
-.product-card:hover img {
+.product-card:hover .product-img {
   transform: scale(1.05);
 }
 
-/* Add to cart button */
+/* ========== Add to cart button ========== */
 .product-card button {
   transition: all 0.3s ease;
 }
@@ -55,13 +94,13 @@ h2 {
   transform: scale(1.02);
 }
 
-/* Search input */
+/* ========== Search input ========== */
 input[type='search'] {
   border-radius: 30px;
   padding-left: 25px;
 }
 
-/* Testimonials */
+/* ========== Testimony ========== */
 .testimony-container {
   background: #fff;
   max-width: 600px;

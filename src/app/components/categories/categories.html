@@ -1,60 +1,60 @@
-<div>
-  <!-- Main Title -->
+<!-- ================== CATEGORIES ================== -->
+<section class="container my-5">
   <h2 class="text-center fw-bold mb-5 display-6 text-gradient">
     Explore <span class="fw-bolder">Top Categories</span>
   </h2>
 
-  <!-- Grid -->
   <div class="row g-4">
-    <!-- Category Card -->
     <div
       class="col-lg-3 col-md-4 col-sm-6"
       *ngFor="let cat of categoryData"
       (click)="getAllProductsByCaterory(cat._id)"
     >
-      <div class="cat-card glass-card rounded-4 shadow-lg p-0 overflow-hidden">
-        <div class="cat-img" href="#all">
-          <img [src]="`${baseURI}/uploads/category/${cat.image}`" class="w-100" [alt]="cat.name" />
+      <div class="cat-card shadow-sm rounded-4 h-100 cursor-pointer">
+        <div class="cat-img">
+          <img [src]="`${baseURI}/uploads/category/${cat.image}`" [alt]="cat.name" />
         </div>
-        <div class="p-3">
+
+        <div class="p-3 text-center">
           <h5 class="fw-bold mb-1">{{ cat.name }}</h5>
-          <p class="text-muted small m-0">Discover products in this category.</p>
+          <p class="text-muted small mb-0">Discover products in this category</p>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- Products Section with Animation -->
-<div
-  id="all"
-  class="products-section section-animate container mt-5"
-  *ngIf="productsData?.length > 0"
->
-  <h3 class="fw-bold mb-4 text-primary">Products in this category</h3>
+<!-- ================== PRODUCTS ================== -->
+<section id="all" class="container my-5 fade-in" *ngIf="productsData?.length > 0">
+  <h3 class="fw-bold mb-4 text-primary text-center">Products in this Category</h3>
 
   <div class="row g-4">
-    <div
-      class="col-md-3 col-sm-6 cursor-pointer"
-      *ngFor="let pro of productsData"
-      [routerLink]="['/details', pro._id]"
-    >
-      <div class="card shadow-sm border-0 h-100 rounded-4 product-card">
-        <img
-          [src]="`${baseURI}/uploads/images/${pro.images[0]}`"
-          class="card-img-top"
-          style="height: 220px; object-fit: cover"
-        />
-        <div class="card-body">
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let pro of productsData">
+      <div class="product-card h-100" [routerLink]="['/details', pro._id]">
+        <!-- Image -->
+        <div class="product-img">
+          <img [src]="`${baseURI}/uploads/images/${pro.images[0]}`" [alt]="pro.productName" />
+          <span class="discount-badge" *ngIf="pro.discountPrice">
+            {{ ((pro.discountPrice / pro.price) * 100).toFixed(0) }}% OFF
+          </span>
+        </div>
+
+        <!-- Body -->
+        <div class="product-body">
           <h6 class="fw-bold mb-1">{{ pro.productName }}</h6>
-          <p class="text-muted small mb-1">{{ pro.category?.name }}</p>
-          <p class="fw-semibold mb-0 text-success">{{ pro.price }} EGP</p>
+          <p class="text-muted small mb-2">{{ pro.category?.name }}</p>
+
+          <div class="price-box">
+            <span class="new-price"> {{ pro.price - pro.discountPrice }} EGP </span>
+            <span class="old-price" *ngIf="pro.discountPrice"> {{ pro.price }} EGP </span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
+<!-- ================== BACK TO TOP ================== -->
 <button class="btn-back-to-top" *ngIf="isShowBackToTop" (click)="scrollToTop()">
   <i class="fa-solid fa-arrow-up"></i>
 </button>

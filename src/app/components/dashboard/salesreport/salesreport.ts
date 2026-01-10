@@ -18,33 +18,42 @@ export class Salesreport {
 
   private readonly _Salesreportservice = inject(Salesreportservice);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getReport('2025-01-01', '2026-01-01');
   }
 
-  getReport(start: string, end: string) {
+  getReport(start: string, end: string): void {
     this.loading = true;
 
     this._Salesreportservice.getSalesReport(start, end).subscribe({
       next: (res) => {
-        this.reportData = res.data;
+        console.log('SALES REPORT RESPONSE:', res);
 
-        const stats = this.reportData.overallStats[0];
+        this.reportData = res.data ?? null;
 
-        this.animateCounter('totalRevenue', stats.totalRevenue);
-        this.animateCounter('totalQty', stats.totalQuantity);
-        this.animateCounter('totalPurchases', stats.totalOrders);
+        const stats = res.data?.overallStats?.[0];
+
+        if (stats) {
+          this.animateCounter('totalRevenue', stats.totalRevenue ?? 0);
+          this.animateCounter('totalQty', stats.totalQuantity ?? 0);
+          this.animateCounter('totalPurchases', stats.totalOrders ?? 0);
+        } else {
+          // fallback آمن
+          this.totalRevenue = 0;
+          this.totalQty = 0;
+          this.totalPurchases = 0;
+        }
 
         this.loading = false;
       },
       error: (err) => {
-        console.log(err);
+        console.error(err);
         this.loading = false;
       },
     });
   }
 
-  animateCounter(prop: string, finalValue: number) {
+  animateCounter(prop: 'totalRevenue' | 'totalQty' | 'totalPurchases', finalValue: number): void {
     let start = 0;
     const duration = 1500;
     const step = finalValue / (duration / 16);

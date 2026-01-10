@@ -1,7 +1,9 @@
 <section class="bg-main-light rounded-4 shadow p-4 my-2 w-75 mx-auto mt-5">
-  <h1 class="h2 text-center">Shop Cart</h1>
+  <h1 class="h2 text-center" *ngIf="cartItem.items?.length">Shop Cart</h1>
 
-  <p class="text-success">Total Cart Price :{{ cartItem.totalCartPrice }}</p>
+  <p class="text-success" *ngIf="cartItem.items?.length">
+    Total Cart Price :{{ cartItem.totalCartPrice }}
+  </p>
 
   @for(item of cartItem.items; track item._id){
   <div class="row mb-1 border-bottom">
@@ -51,7 +53,9 @@
   </div>
   }
 
-  <button routerLink="/orders" class="btn-main mt-2">CHECKOUT</button>
+  <button *ngIf="cartItem.items?.length" routerLink="/orders" class="btn-main mt-2">
+    CHECKOUT
+  </button>
 
   <p *ngIf="!cartItem.items?.length" class="text-center text-muted mt-3">Your cart is empty</p>
 </section>

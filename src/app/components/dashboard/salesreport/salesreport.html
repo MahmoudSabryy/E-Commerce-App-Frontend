@@ -70,7 +70,7 @@
       <div class="month-card" *ngFor="let month of reportData?.monthlySales">
         <h5>{{ month._id.month }} / {{ month._id.year }}</h5>
         <p>
-          Revenue: <strong>{{ month.totalRevenue | number }}</strong>
+          Revenue: <strong>{{ month?.totalRevenue | number }}</strong>
         </p>
         <p>
           Qty: <strong>{{ month.totalQuantity }}</strong>

@@ -1,17 +1,149 @@
-.product-card {
-  transition: 0.3s ease;
+/* ===== Header ===== */
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.search-box {
+  display: flex;
   background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.search-box input {
+  border: none;
+  padding: 10px 20px;
+  outline: none;
+  width: 220px;
+}
+
+.search-box button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0 18px;
+}
+
+/* ===== Product Card ===== */
+.product-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 0.3s;
 }
 
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
 }
 
-.object-fit-cover {
-  object-fit: cover;
+/* Image */
+.product-img-wrapper {
+  background: #f8f9fa;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.text-main {
-  color: #0aad0a;
+.product-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: 0.3s;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Body */
+.product-body {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.product-category {
+  font-size: 12px;
+  color: #888;
+  font-weight: 600;
+}
+
+.product-title {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+/* Price */
+.price-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.new-price {
+  font-weight: 700;
+  color: #198754;
+}
+
+.old-price {
+  font-size: 13px;
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+/* Discount */
+.discount-badge {
+  display: inline-block;
+  margin-top: 8px;
+  background: #dc3545;
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* Stock */
+.stock-info {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.stock-info.out {
+  color: #999;
+}
+
+/* Button */
+.add-cart-btn {
+  border: none;
+  background: #000;
+  color: #fff;
+  padding: 12px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.add-cart-btn:hover {
+  background: #111;
+}
+
+.add-cart-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Pagination */
+.pagination .page-link {
+  border-radius: 20px;
+  padding: 8px 14px;
 }

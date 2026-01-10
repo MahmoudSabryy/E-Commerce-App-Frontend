@@ -29,6 +29,13 @@ export class Auth {
     }
   }
 
+  isLoggedIn(): Boolean {
+    if (localStorage.getItem('userToken') !== null) {
+      this.userDataFromToken = jwtDecode(localStorage.getItem('userToken')!);
+    }
+    return this.userDataFromToken.role === 'admin' ? true : false;
+  }
+
   logOut(): void {
     localStorage.removeItem('userToken');
     this.userDataFromToken = null;

@@ -11,8 +11,8 @@ export class Productservice {
 
   myHeaders: any = { authorization: localStorage.getItem('userToken') };
 
-  getAllProducts(): Observable<any> {
-    return this._HttpClient.get(`${environment.baseURI}/product`);
+  getAllProducts(page: number = 1, limit: number = 8) {
+    return this._HttpClient.get<any>(`${environment.baseURI}/product?page=${page}&limit=${limit}`);
   }
 
   getSpecificProductsById(id: string | null): Observable<any> {

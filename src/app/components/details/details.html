@@ -1,59 +1,91 @@
-@if(productDetails){
-<br />
-<br />
-<br />
-<section>
-  <div class="row align-items-center">
-    <h1 class="text-center text-main my-2">Product Details</h1>
+@if (productDetails) {
 
-    @for (product of productDetails; track $index) {
-    <div class="col-md-3">
-      <div class="product-image-container">
+<section class="product-details container my-5">
+  <h2 class="text-center fw-bold mb-5">Product Details</h2>
+
+  @for (product of productDetails; track product._id) {
+
+  <div class="row g-5">
+    <!-- LEFT : Images -->
+    <div class="col-md-5">
+      <!-- Main Slider -->
+      <div class="product-gallery shadow-sm mb-3">
         <owl-carousel-o [options]="customOptions">
           <ng-container *ngFor="let img of product.images">
             <ng-template carouselSlide>
               <img
+                class="main-img"
                 [src]="`${baseURI}/uploads/images/${img}`"
-                class="w-100 rounded-3"
                 [alt]="product.productName"
               />
             </ng-template>
           </ng-container>
         </owl-carousel-o>
       </div>
+
+      <!-- Thumbnails -->
+      <div class="d-flex gap-2 thumbnails">
+        <img *ngFor="let img of product.images" [src]="`${baseURI}/uploads/images/${img}`" />
+      </div>
     </div>
 
-    <div class="col-md-9">
-      <h2>{{ product.productName }}</h2>
-      <p class="text-muted">{{ product.productDesc }}</p>
-      <h3>{{ product.category.name }}</h3>
+    <!-- RIGHT : Info -->
+    <div class="col-md-7">
+      <span class="category">{{ product.category.name }}</span>
 
-      <div class="d-flex align-items-center">
-        <span class="text-success fw-bold">
-          {{ (((product.price - product.discountPrice) / product.price) * 100).toFixed(0) }}% off
+      <h1 class="product-title">{{ product.productName }}</h1>
+
+      <!-- Rating -->
+      <div class="rating mb-2">
+        ⭐⭐⭐⭐☆
+        <span class="text-muted">(120 reviews)</span>
+      </div>
+
+      <p class="product-desc">{{ product.productDesc }}</p>
+
+      <!-- Price -->
+      <div class="price-wrapper">
+        <span class="current-price"> {{ product.price - product.discountPrice }} EGP </span>
+        <span class="old-price">{{ product.price }} EGP</span>
+        <span class="discount">
+          {{ (((product.price - product.discountPrice) / product.price) * 100).toFixed(0) }}% OFF
         </span>
       </div>
 
-      <div class="d-flex align-items-center mt-2">
-        <span class="h5 text-danger"> {{ product.price - product.discountPrice }} EGP </span>
-        <span class="ms-2 text-muted text-decoration-line-through"> {{ product.price }} EGP </span>
+      <!-- Stock -->
+      <div class="stock" *ngIf="product.stock <= 5 && product.stock !== 0">
+        {{ product.stock }} items left
       </div>
-      <div class="mt-2">
-        <span
-          style="font-size: smaller"
-          class="text-danger fw-bold"
-          *ngIf="product.stock <= 5 && product.stock !== 0"
-        >
-          {{ product.stock }} items remainig in the stock
-        </span>
-        <span style="font-size: smaller" class="text-danger fw-bold" *ngIf="product.stock === 0">
-          Out of stock
-        </span>
-      </div>
-      <button (click)="addToCart(product._id)" class="btn-main w-100">Add to Cart</button>
+
+      <div class="stock out" *ngIf="product.stock === 0">Out of stock</div>
+
+      <!-- Button -->
+      <button
+        class="add-to-cart-btn mt-4"
+        [disabled]="product.stock === 0"
+        (click)="addToCart(product._id)"
+      >
+        Add to Cart
+      </button>
     </div>
-    }
   </div>
+
+  <!-- Reviews -->
+  <div class="reviews mt-5">
+    <h3 class="fw-bold mb-3">Customer Reviews</h3>
+
+    <div class="review-card">
+      <strong>Ahmed</strong>
+      <p>Excellent quality and fast delivery.</p>
+    </div>
+
+    <div class="review-card">
+      <strong>Sara</strong>
+      <p>Very good product, recommended 👍</p>
+    </div>
+  </div>
+
+  }
 </section>
 
 }

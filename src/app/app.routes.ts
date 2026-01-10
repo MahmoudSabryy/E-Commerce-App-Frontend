@@ -21,9 +21,9 @@ import { Productsdashboard } from './components/dashboard/productsdashboard/prod
 import { Categorydashboard } from './components/dashboard/categorydashboard/categorydashboard';
 import { adminGuard } from './core/guards/admin-guard';
 import { Subcategorydashboard } from './components/dashboard/subcategorydashboard/subcategorydashboard';
-import { Salesreport } from './components/dashboard/salesreport/salesreport';
 import { User } from './components/user/user';
 import { Testinomialdashboard } from './components/dashboard/testinomialdashboard/testinomialdashboard';
+import { Salesreport } from './components/dashboard/salesreport/salesreport';
 
 export const routes: Routes = [
   {
